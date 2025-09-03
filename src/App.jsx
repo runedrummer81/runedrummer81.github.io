@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 export default function App() {
   return (
     <>
-      <BrowserRouter basename={import.meta.env.DEV ? "/" : "runefrisch"}>
+      <BrowserRouter>
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
