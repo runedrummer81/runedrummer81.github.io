@@ -1,7 +1,7 @@
 export default function Contacts() {
   return (
     <>
-      <h1>Dette er contacts</h1>
+      <h1>Dette er alle de gode contacts</h1>
     </>
   );
 }
