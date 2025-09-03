@@ -1,0 +1,66 @@
+/* ---------- Root Variables ---------- */
+:root {
+  --primary-color: #dbfcec;
+  --primary-dark: #184e51;
+  --primary-light: #acc6c9;
+  --background: #e7f8f8;
+  --dark: #363135;
+  --text-light: #ad98c4;
+  --white: #f3e6d7;
+  --border-radius: 8px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Global Styling ---------- */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--dark);
+  font-family: sans-serif;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* ---------- Navigation ---------- */
+nav {
+  display: flex;
+  background-color: var(--dark);
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow);
+  font-size: 1.5rem;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+nav a {
+  color: var(--text-light);
+  text-decoration: none;
+  margin-right: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: var(--primary-color);
+  color: var(--primary-dark);
+}
+
+nav a.active {
+  background-color: var(--primary-dark);
+}
+
+nav a.active:hover {
+  color: var(--primary-color);
+}
