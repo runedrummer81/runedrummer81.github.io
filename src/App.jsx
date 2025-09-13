@@ -1,22 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router";
-import Navigation from "./components/Navigation";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+import React from "react";
+import Navbar from "./components/Navbar";
 
-export default function App() {
+const App = () => {
   return (
-    <>
-      <BrowserRouter>
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <div className="container mx-auto max-w-7xl">
+      <Navbar />
+    </div>
   );
-}
+};
+
+export default App;
