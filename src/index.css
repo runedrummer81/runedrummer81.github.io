@@ -55,6 +55,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .c-space {
   @apply sm:px-10 px-5 lg:px-15;
 }

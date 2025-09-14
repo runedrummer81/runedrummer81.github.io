@@ -7,14 +7,6 @@ function Navigation() {
       <li>
         <a
           className="nav-link text-neutral-400 hover:text-white transition-colors"
-          href="#home"
-        >
-          Home
-        </a>
-      </li>
-      <li>
-        <a
-          className="nav-link text-neutral-400 hover:text-white transition-colors"
           href="#about"
         >
           About
@@ -23,9 +15,17 @@ function Navigation() {
       <li>
         <a
           className="nav-link text-neutral-400 hover:text-white transition-colors"
+          href="#projects"
+        >
+          Projects
+        </a>
+      </li>
+      <li>
+        <a
+          className="nav-link text-neutral-400 hover:text-white transition-colors"
           href="#work"
         >
-          Work
+          Services
         </a>
       </li>
       <li>
@@ -52,7 +52,7 @@ const Navbar = () => {
             href="/"
             className="text-xl font-bold transition-colors text-neutral-400 hover:text-white"
           >
-            Rune
+            Rune Frisch
           </a>
 
           {/* Burger button (mobile only) */}
