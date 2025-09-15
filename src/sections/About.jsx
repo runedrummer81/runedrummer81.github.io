@@ -8,7 +8,26 @@ import { Frameworks } from "../components/Frameworks";
 const About = () => {
   const grid2Container = useRef();
   const [isOpen, setIsOpen] = useState(false); // 🔹 Modal state
-  const [isTechOpen, setIsTechOpen] = useState(false); // 🔹 Tech Modal state
+
+  const [activeAlbum, setActiveAlbum] = useState(1);
+
+  const spotifyLinks = {
+    1: "https://open.spotify.com/artist/21h3ZMAgqVovSFIqUoP3jv?si=ovagSKBPQD6EMkbQxkfi-A",
+    2: "https://open.spotify.com/artist/25yCmYx78hTeQu2RD7ZAvz?si=jICn1Dn8T1a4e6tuyvHF2Q",
+  };
+
+  const youtubeLink = "https://www.youtube.com/watch?v=CWYFTknRYX0";
+
+  // 🔹 Auto-switch albums every 5s when modal is open
+  useEffect(() => {
+    if (!isOpen) return; // only run when modal is open
+
+    const interval = setInterval(() => {
+      setActiveAlbum((prev) => (prev === 3 ? 1 : prev + 1));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isOpen]);
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -104,7 +123,7 @@ const About = () => {
             </p>
           </div>
           <figure className="absolute left-[30%] top-[10%]">
-            <Globe />
+            {/* <Globe /> */}
           </figure>
         </div>
 
@@ -130,12 +149,6 @@ const About = () => {
           <div className="absolute inset-y-0 md:inset-y-9 w-full h-full start-[50%] md:scale-125">
             <Frameworks />
           </div>
-          {/* Hover overlay */}
-          <div className="absolute inset-0 flex items-center justify-left bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-lg">
-            <p className="text-white text-2xl font-bold">
-              Watch the complete list of programs that I use!
-            </p>
-          </div>
         </div>
       </div>
 
@@ -151,6 +164,7 @@ const About = () => {
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
             />
+
             {/* Modal content */}
             <motion.div
               className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -167,37 +181,128 @@ const About = () => {
                 >
                   ✖
                 </button>
-                <h2 className="text-3xl font-bold mb-4">About Me 🎶</h2>
+
+                <h2 className="text-3xl font-bold mb-4">About Me</h2>
+
+                <img
+                  src="/assets/svartsot1.jpg"
+                  alt="band image"
+                  className="w-full md:w-auto md:max-w-full rounded-lg mb-6 object-cover mx-auto"
+                />
+
                 {/* Responsive flex container for modal text + image */}
                 <div className="flex flex-col md:flex-row items-start gap-6">
                   {/* Text container fills available space */}
                   <div className="flex-1">
                     <p className="mb-4 text-neutral-300">
-                      Hi! My name is Rune, and besides being a web developer
-                      I’ve been deeply involved in music for years. I’ve
-                      recorded albums, played live shows, and spent countless
-                      nights in the studio...
+                      Besides being passionate about programming and studying
+                      multimedia design, I also have a rich background in music.
+                      I've performed over 200 gigs internationally, including
+                      major festivals, and some of the songs I’ve recorded with
+                      various bands have reached over a million streams.
                     </p>
                     <p className="mb-4 text-neutral-300">
-                      In my free time I also love gaming, D&D, fantasy novels,
-                      and horror movies 🍿. Creativity has always been my fuel,
-                      whether it’s in sound or code.
+                      Creativity and enthusiasm drive everything I do, whether
+                      it’s writing code or composing tunes, and I love blending
+                      both worlds to craft unique digital experiences.
                     </p>
                     <p className="text-neutral-300">
-                      Want to hear some of my music? Check out my{" "}
-                      <a href="#" className="text-indigo-400 hover:underline">
-                        discography
-                      </a>
-                      .
+                      Want to hear some of my music?
                     </p>
                   </div>
-                  {/* Image on right (desktop), below (mobile) */}
-                  <img
-                    src="/assets/forever-still-cover1.jpg"
-                    alt="album cover 1"
-                    className="w-55 h-55 object-cover rounded-lg md:ml-4"
-                  />
+
+                  {/* Album toggle container */}
+                  <div className="flex flex-col gap-4">
+                    {/* Large active media display (animated) */}
+                    <div className="relative w-56 h-56 mx-auto md:mx-0">
+                      <AnimatePresence mode="wait">
+                        {activeAlbum === 3 ? (
+                          <motion.a
+                            key="yt"
+                            href={youtubeLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.45 }}
+                            className="absolute inset-0"
+                          >
+                            <motion.img
+                              src="/assets/yt-cover2.webp"
+                              alt="Drum Cover on YouTube"
+                              className="w-full h-full object-cover rounded-lg cursor-pointer hover:scale-105"
+                              draggable={false}
+                            />
+                          </motion.a>
+                        ) : (
+                          <motion.a
+                            key={`sp-${activeAlbum}`}
+                            href={spotifyLinks[activeAlbum]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.45 }}
+                            className="absolute inset-0"
+                          >
+                            <motion.img
+                              src={
+                                activeAlbum === 1
+                                  ? "/assets/forever-still-cover1.jpg"
+                                  : "/assets/cover-art2.jpg"
+                              }
+                              alt={
+                                activeAlbum === 1
+                                  ? "album cover 1"
+                                  : "album cover 2"
+                              }
+                              className="w-full h-full object-cover rounded-lg cursor-pointer hover:scale-105"
+                              draggable={false}
+                            />
+                          </motion.a>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* Toggle thumbnails */}
+                    <div className="flex gap-4 justify-center md:justify-start">
+                      <img
+                        onClick={() => setActiveAlbum(1)}
+                        src="/assets/forever-still-cover1.jpg"
+                        alt="album cover 1 thumbnail"
+                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer transition-opacity ${
+                          activeAlbum === 1
+                            ? "opacity-100 border-2 border-indigo-400"
+                            : "opacity-50"
+                        } hover:opacity-100`}
+                      />
+                      <img
+                        onClick={() => setActiveAlbum(2)}
+                        src="/assets/cover-art2.jpg"
+                        alt="album cover 2 thumbnail"
+                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer transition-opacity ${
+                          activeAlbum === 2
+                            ? "opacity-100 border-2 border-indigo-400"
+                            : "opacity-50"
+                        } hover:opacity-100`}
+                      />
+                      <img
+                        onClick={() => setActiveAlbum(3)}
+                        src="/assets/yt-cover2.webp"
+                        alt="youtube drum cover thumbnail"
+                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer transition-opacity ${
+                          activeAlbum === 3
+                            ? "opacity-100 border-2 border-red-600"
+                            : "opacity-50"
+                        } hover:opacity-100`}
+                      />
+                    </div>
+                  </div>
                 </div>
+
+                {/* rest of modal content (if any) */}
               </div>
             </motion.div>
           </>
