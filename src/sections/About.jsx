@@ -8,8 +8,8 @@ import { Frameworks } from "../components/Frameworks";
 const About = () => {
   const grid2Container = useRef();
   const [isOpen, setIsOpen] = useState(false); // 🔹 Modal state
-
   const [activeAlbum, setActiveAlbum] = useState(1);
+  const [hovered, setHovered] = useState(false); // Hover state for grid 5
 
   const spotifyLinks = {
     1: "https://open.spotify.com/artist/21h3ZMAgqVovSFIqUoP3jv?si=ovagSKBPQD6EMkbQxkfi-A",
@@ -31,14 +31,24 @@ const About = () => {
 
   // Prevent background scroll when modal is open
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
+      document.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.classList.remove("overflow-hidden");
+      document.removeEventListener("keydown", handleKeyDown);
     }
+
     // Cleanup on unmount
     return () => {
       document.body.classList.remove("overflow-hidden");
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
 
@@ -138,15 +148,76 @@ const About = () => {
         </div>
 
         {/* Grid 5 */}
-        <div className="grid-default-color grid-5">
-          <div className="z-10 w-[50%]">
-            <p className="headText">Tech Stack</p>
-            <p className="subtext">
-              I specialize in a variety of languages, frameworks, and tools that
-              allow me to build robust and scalable applications
+        <div
+          className="flex flex-wrap grid-default-color grid-5 relative"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          {/* Text content that hides on hover */}
+          <div
+            className={`z-10 w-[50%] transition-opacity ${
+              hovered ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            <p className="text-5xl">Tools</p>
+            <p className="headtext">
+              I have basic but solid experience with different languages,
+              frameworks, and tools that help me build functional applications.
             </p>
           </div>
-          <div className="absolute inset-y-0 md:inset-y-9 w-full h-full start-[50%] md:scale-125">
+
+          {/* Hover heading */}
+          <p
+            className={`absolute top-10 left-1/2 transform -translate-x-1/2 text-5xl font-bold transition-opacity pointer-events-none ${
+              hovered ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            My Tools
+          </p>
+
+          {/* Logos container */}
+          <div
+            key={hovered ? "hovered" : "idle"} // 🔑 re-mounts on hover toggle
+            className={`absolute top-28 left-1/2 transform -translate-x-1/2 grid grid-cols-8 grid-rows-2 gap-10 transition-opacity pointer-events-none w-160 ${
+              hovered ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {[
+              "/assets/logos/css3.svg",
+              "/assets/logos/html5.svg",
+              "/assets/logos/javascript.svg",
+              "/assets/logos/react.svg",
+              "/assets/logos/github.svg",
+              "/assets/logos/tailwindcss.svg",
+              "/assets/logos/visualstudiocode.svg",
+              "/assets/logos/figma-icon.svg",
+              "/assets/logos/visualstudiocode.svg",
+              "/assets/logos/davinci-resolve-12.svg",
+              "/assets/logos/audacity-icon.svg",
+              "/assets/logos/adobe-illustrator-icon.svg",
+              "/assets/logos/adobe-after-effects-icon.svg",
+              "/assets/logos/adobe-photoshop-icon.svg",
+            ].map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt="logo"
+                style={{ animationDelay: `${i * 0.03}s` }}
+                className="w-12 h-12 opacity-0 fade-in"
+              />
+            ))}
+          </div>
+
+          {/* Frameworks component, hides on hover */}
+          <div
+            className={`absolute top-1/2 right-0 transform -translate-y-1/2 transition-opacity ${
+              hovered ? "opacity-0" : "opacity-100"
+            }`}
+            style={{
+              width: "0%", // keeps hidden / collapsed
+              height: "80%",
+            }}
+          >
             <Frameworks />
           </div>
         </div>
@@ -176,7 +247,10 @@ const About = () => {
               <div className="relative bg-neutral-900 text-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh]">
                 {/* Close button */}
                 <button
-                  className="absolute top-4 right-4 text-neutral-400 hover:text-white"
+                  className="absolute top-4 right-4 
+             text-neutral-400 hover:text-white 
+             w-10 h-10 flex items-center justify-center 
+             text-2xl rounded-full hover:bg-neutral-800 transition"
                   onClick={() => setIsOpen(false)}
                 >
                   ✖
@@ -199,16 +273,56 @@ const About = () => {
                       multimedia design, I also have a rich background in music.
                       I've performed over 200 gigs internationally, including
                       major festivals, and some of the songs I’ve recorded with
-                      various bands have reached over a million streams.
+                      various bands have reached overseveral millions streams.
                     </p>
                     <p className="mb-4 text-neutral-300">
                       Creativity and enthusiasm drive everything I do, whether
                       it’s writing code or composing tunes, and I love blending
                       both worlds to craft unique digital experiences.
                     </p>
-                    <p className="text-neutral-300">
-                      Want to hear some of my music?
-                    </p>
+                    <div>
+                      <p className="text-neutral-300 font-extrabold">
+                        My Socials:
+                      </p>
+                      <div className="flex gap-1.5">
+                        <a
+                          href="https://www.instagram.com/runefrisch/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block"
+                        >
+                          <img
+                            src="/assets/logos/instagram.svg"
+                            alt="Instagram logo"
+                            className="w-8 h-8 mt-1"
+                          />
+                        </a>
+                        <a
+                          href="https://www.facebook.com/rune.frisch"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block ml-4"
+                        >
+                          <img
+                            src="/assets/logos/facebook.svg"
+                            alt="Facebook logo"
+                            className="w-8 h-8 mt-1"
+                          />
+                        </a>
+                        <a
+                          href="https://www.linkedin.com/in/rune-frisch-1a5414383/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block ml-4"
+                        >
+                          <img
+                            src="/assets/logos/linkedin.svg"
+                            alt="LinkedIn logo"
+                            className="w-8 h-8 mt-1"
+                          />
+                        </a>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Album toggle container */}

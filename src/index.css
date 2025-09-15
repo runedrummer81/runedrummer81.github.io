@@ -7,6 +7,21 @@
   font-style: normal;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
 @theme {
   --color-primary: #030412;
   --color-midnight: #06091f;
