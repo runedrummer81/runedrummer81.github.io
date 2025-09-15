@@ -1,8 +1,6 @@
-"use client";
-
 import createGlobe from "cobe";
 import { useMotionValue, useSpring } from "motion/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { twMerge } from "tailwind-merge";
 
@@ -32,13 +30,13 @@ const GLOBE_CONFIG = {
     { location: [19.4326, -99.1332], size: 0.1 },
     { location: [40.7128, -74.006], size: 0.1 },
     { location: [34.6937, 135.5022], size: 0.05 },
-    { location: [41.0082, 28.9784], size: 0.06 },
-  ],
+    { location: [41.0082, 28.9784], size: 0.06 }
+  ]
 };
 
 export function Globe({ className, config = GLOBE_CONFIG }) {
-  let phi = 0;
-  let width = 0;
+  const phi = useRef(0);
+  const [width, setWidth] = useState(0);
   const canvasRef = useRef(null);
   const pointerInteracting = useRef(null);
   const pointerInteractionMovement = useRef(0);
@@ -47,17 +45,17 @@ export function Globe({ className, config = GLOBE_CONFIG }) {
   const rs = useSpring(r, {
     mass: 1,
     damping: 30,
-    stiffness: 100,
+    stiffness: 100
   });
 
-  const updatePointerInteraction = (value) => {
+  const updatePointerInteraction = value => {
     pointerInteracting.current = value;
     if (canvasRef.current) {
       canvasRef.current.style.cursor = value !== null ? "grabbing" : "grab";
     }
   };
 
-  const updateMovement = (clientX) => {
+  const updateMovement = clientX => {
     if (pointerInteracting.current !== null) {
       const delta = clientX - pointerInteracting.current;
       pointerInteractionMovement.current = delta;
@@ -68,54 +66,61 @@ export function Globe({ className, config = GLOBE_CONFIG }) {
   useEffect(() => {
     const onResize = () => {
       if (canvasRef.current) {
-        width = canvasRef.current.offsetWidth;
+        const newWidth = canvasRef.current.offsetWidth;
+        setWidth(newWidth);
+        console.log("[Globe] Canvas width set to:", newWidth);
       }
     };
 
     window.addEventListener("resize", onResize);
     onResize();
 
-    const globe = createGlobe(canvasRef.current, {
-      ...config,
-      width: width * 2,
-      height: width * 2,
-      onRender: (state) => {
-        if (!pointerInteracting.current) phi += 0.005;
-        state.phi = phi + rs.get();
-        state.width = width * 2;
-        state.height = width * 2;
-      },
-    });
-
-    setTimeout(() => (canvasRef.current.style.opacity = "1"), 0);
     return () => {
-      globe.destroy();
       window.removeEventListener("resize", onResize);
     };
-  }, [rs, config]);
+  }, []);
+
+  useEffect(() => {
+    if (!canvasRef.current || width === 0) {
+      console.warn("[Globe] Canvas ref not ready or width is zero.");
+      return;
+    }
+    let globe;
+    try {
+      globe = createGlobe(canvasRef.current, {
+        ...config,
+        width: width * 2,
+        height: width * 2,
+        onRender: state => {
+          if (!pointerInteracting.current) phi.current += 0.005;
+          state.phi = phi.current + rs.get();
+          state.width = width * 2;
+          state.height = width * 2;
+        }
+      });
+      setTimeout(() => (canvasRef.current.style.opacity = "1"), 0);
+      console.log("[Globe] Globe created with width:", width * 2);
+    } catch (e) {
+      console.error("[Globe] Error creating globe:", e);
+    }
+    return () => {
+      if (globe) globe.destroy();
+    };
+  }, [rs, config, width]);
 
   return (
-    <div
-      className={twMerge(
-        "mx-auto aspect-[1/1] w-full max-w-[600px]",
-        className
-      )}
-    >
+    <div className={twMerge("mx-auto aspect-[1/1] w-full max-w-[600px]", className)}>
       <canvas
-        className={twMerge(
-          "size-[30rem] opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
-        )}
+        className={twMerge("size-[30rem] opacity-0 transition-opacity duration-500 [contain:layout_paint_size]")}
         ref={canvasRef}
-        onPointerDown={(e) => {
+        onPointerDown={e => {
           pointerInteracting.current = e.clientX;
           updatePointerInteraction(e.clientX);
         }}
         onPointerUp={() => updatePointerInteraction(null)}
         onPointerOut={() => updatePointerInteraction(null)}
-        onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) =>
-          e.touches[0] && updateMovement(e.touches[0].clientX)
-        }
+        onMouseMove={e => updateMovement(e.clientX)}
+        onTouchMove={e => e.touches[0] && updateMovement(e.touches[0].clientX)}
       />
     </div>
   );
