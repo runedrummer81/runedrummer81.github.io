@@ -60,7 +60,10 @@ const About = () => {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12">
         {/* Grid 1: Profile picture */}
         <div
-          className="relative flex items-end grid-default-color grid-1 cursor-pointer"
+          className="relative flex items-end grid-default-color grid-1 cursor-pointer rounded-lg overflow-hidden
+    bg-[hsl(185,90%,50%)]
+    shadow-[0_0_10px_3px_hsl(185,90%,50%)]
+    animate-pulse-glow"
           onClick={() => setIsOpen(true)} // 🔹 Open modal when clicked
         >
           <img

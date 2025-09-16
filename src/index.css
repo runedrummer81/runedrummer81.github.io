@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "MyCustomFont";
+  font-family: "Norse";
   src: url("/fonts/norse.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
@@ -79,7 +79,7 @@
 }
 body {
   background: #030412;
-  font-family: "norse", sans-serif;
+  font-family: "Norse", sans-serif;
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;

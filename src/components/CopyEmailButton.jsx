@@ -5,35 +5,37 @@ const DownloadCVButton = () => {
   const [downloaded, setDownloaded] = useState(false);
 
   const handleDownload = () => {
-    // Replace with the actual path to your soft-skill CV PDF
     const link = document.createElement("a");
     link.href = "/assets/soft-skill-cv.pdf";
     link.download = "Rune-Frisch-Soft-Skill-CV.pdf";
     link.click();
 
     setDownloaded(true);
-
-    setTimeout(() => {
-      setDownloaded(false);
-    }, 2000);
+    setTimeout(() => setDownloaded(false), 2000);
   };
 
   return (
     <motion.button
       onClick={handleDownload}
-      whileHover={{ y: -5 }}
       whileTap={{ scale: 1.05 }}
-      className="relative px-1 py-4 text-sm text-center rounded-full font-extralight bg-primary w-[14rem] cursor-pointer overflow-hidden"
+      className="cursor-pointer
+    relative w-[14rem] px-4 py-3 rounded-full font-semibold text-black
+    bg-[hsl(185,90%,50%)]
+    shadow-[0_0_16px_4px_hsl(185,90%,50%)]
+    animate-pulse-glow
+    transition-transform duration-300 hover:scale-105
+    flex items-center justify-center gap-2
+  "
     >
       <AnimatePresence mode="wait">
         {downloaded ? (
           <motion.p
-            className="flex items-center justify-center gap-2"
             key="downloaded"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.1, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="flex items-center gap-2"
           >
             <img
               src="assets/download-file-done.svg"
@@ -44,12 +46,12 @@ const DownloadCVButton = () => {
           </motion.p>
         ) : (
           <motion.p
-            className="flex items-center justify-center gap-2"
             key="download"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.2 }}
+            className="flex items-center gap-2"
           >
             <img
               src="assets/download-file.svg"
