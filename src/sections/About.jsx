@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Card from "../components/Card";
 import { Globe } from "../components/Globe";
-import CopyEmailButton from "../components/CopyEmailButton";
+import CopyEmailButton from "../components/DownloadButton";
 import { Frameworks } from "../components/Frameworks";
 
 const About = () => {

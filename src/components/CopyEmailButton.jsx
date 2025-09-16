@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-const DownloadCVButton = () => {
-  const [downloaded, setDownloaded] = useState(false);
+const CopyEmailButton = () => {
+  const [copied, setCopied] = useState(false);
+  const email = "runedrummer81@gmail.com";
 
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = "/assets/soft-skill-cv.pdf";
-    link.download = "Rune-Frisch-Soft-Skill-CV.pdf";
-    link.click();
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
 
-    setDownloaded(true);
-    setTimeout(() => setDownloaded(false), 2000);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
-
   return (
     <motion.button
-      onClick={handleDownload}
+      onClick={copyToClipboard}
+      whileHover={{ y: 0 }}
       whileTap={{ scale: 1.05 }}
       className="cursor-pointer
     relative w-[14rem] px-4 py-3 rounded-full font-semibold text-black
@@ -28,37 +28,33 @@ const DownloadCVButton = () => {
   "
     >
       <AnimatePresence mode="wait">
-        {downloaded ? (
+        {copied ? (
           <motion.p
-            key="downloaded"
+            className="flex items-center justify-center gap-2"
+            key="copied"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="flex items-center gap-2"
+            transition={{ duration: 0.1, ease: "easeInOut" }}
           >
             <img
-              src="assets/download-file-done.svg"
+              src="assets/copy-done.svg"
               className="w-5"
-              alt="download successful icon"
+              alt="copy succesful icon"
             />
-            Soft-Skill CV Downloaded
+            Email Copied
           </motion.p>
         ) : (
           <motion.p
-            key="download"
+            className="flex items-center justify-center gap-2"
+            key="copy"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="flex items-center gap-2"
+            transition={{ duration: 0.1 }}
           >
-            <img
-              src="assets/download-file.svg"
-              className="w-5"
-              alt="download icon"
-            />
-            Download Soft-Skill CV
+            <img src="assets/copy.svg" className="w-5" alt="copy icon" />
+            Copy Email Address
           </motion.p>
         )}
       </AnimatePresence>
@@ -66,4 +62,4 @@ const DownloadCVButton = () => {
   );
 };
 
-export default DownloadCVButton;
+export default CopyEmailButton;
