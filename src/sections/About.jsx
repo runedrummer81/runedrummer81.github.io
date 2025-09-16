@@ -140,9 +140,10 @@ const About = () => {
         {/* Grid 4 */}
         <div className="grid-special-color grid-4">
           <div className="flex flex-col items-center justify-center gap-4 size-full">
-            <p className="text-center headtext">
-              Do you want to get in touch with me?
-            </p>
+            <h2 className="text-center font-bold text-2xl">
+              Want to know me a bit better?
+            </h2>
+            <p>I’ve taken a personality test through Praice</p>
             <CopyEmailButton />
           </div>
         </div>
@@ -172,7 +173,7 @@ const About = () => {
               hovered ? "opacity-100" : "opacity-0"
             }`}
           >
-            My Tools
+            Weapons of choice
           </p>
 
           {/* Logos container */}
