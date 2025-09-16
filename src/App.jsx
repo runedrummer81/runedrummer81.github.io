@@ -12,7 +12,6 @@ const App = () => {
       <Hero />
       <About />
       <Projects />
-      <section className="min-h-screen" />
       <Footer />
     </div>
   );

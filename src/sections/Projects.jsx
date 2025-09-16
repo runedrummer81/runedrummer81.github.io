@@ -78,7 +78,11 @@ const Projects = () => {
   };
 
   return (
-    <section className="relative py-20">
+    <section id="projects" className="relative pt-10 pb-20">
+      <h2 className="relative z-10 text-5xl font-extrabold text-left text-white mb-12">
+        My Projects
+      </h2>
+
       <img
         src="/assets/img-bg.png"
         alt="background"

@@ -53,8 +53,10 @@ const About = () => {
   }, [isOpen]);
 
   return (
-    <section id="about" className="c-space section-spacing">
-      <h2 className="text-heading">About Me</h2>
+    <section id="about" className="relative pt-20 pb-10">
+      <h2 className="z-10 text-5xl font-extrabold text-left text-white mb-12">
+        About Me
+      </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12">
         {/* Grid 1: Profile picture */}
         <div
@@ -198,6 +200,7 @@ const About = () => {
               "/assets/logos/adobe-illustrator-icon.svg",
               "/assets/logos/adobe-after-effects-icon.svg",
               "/assets/logos/adobe-photoshop-icon.svg",
+              "/assets/logos/adobe-dimension-icon.svg",
             ].map((src, i) => (
               <img
                 key={i}
