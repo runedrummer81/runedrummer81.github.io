@@ -87,38 +87,23 @@ const About = () => {
           >
             <p className="flex items-end text-5xl text-gray-500">MY HOBBIES</p>
             <Card
-              style={{ rotate: "75deg", top: "30%", left: "20%" }}
-              text="MUSIC"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "-30deg", top: "60%", left: "45%" }}
-              text="GAMING"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "55deg", bottom: "40%", left: "70%" }}
-              text="D&D"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "-45deg", top: "55%", left: "0%" }}
-              text="FANTASY NOVELS"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "20deg", top: "10%", left: "38%" }}
-              text="HORROR MOVIES"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "54deg", top: "25%", left: "2%" }}
-              text="PROGRAMMING"
-              containerRef={grid2Container}
-            />
-            <Card
               style={{ rotate: "30deg", top: "10%", left: "70%" }}
               image="assets/veggie-logo.png"
+              containerRef={grid2Container}
+            />
+            <Card
+              style={{ rotate: "1deg", top: "64%", left: "5%" }}
+              image="assets/logos/world-of-warcraft-logo.svg"
+              containerRef={grid2Container}
+            />
+            <Card
+              style={{ rotate: "1deg", top: "14%", left: "15%" }}
+              image="assets/logos/twenty-dice.svg"
+              containerRef={grid2Container}
+            />
+            <Card
+              style={{ rotate: "1deg", top: "64%", left: "80%" }}
+              image="assets/logos/helldivers2-logo.svg"
               containerRef={grid2Container}
             />
             <Card
