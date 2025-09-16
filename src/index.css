@@ -7,6 +7,14 @@
   font-style: normal;
 }
 
+/* custom clip-path utilities */
+.clip-path-small {
+  clip-path: circle(8px at 88% 9%);
+}
+.clip-path-full {
+  clip-path: circle(120% at 50% 50%);
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
