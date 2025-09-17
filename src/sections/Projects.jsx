@@ -83,11 +83,6 @@ const Projects = () => {
         My Projects
       </h2>
 
-      <img
-        src="/assets/img-bg.png"
-        alt="background"
-        className="absolute top-0 left-0 w-full h-full object-cover object-center"
-      />
       <div className="absolute top-0 left-0 w-full h-full backdrop-blur-2xl" />
 
       <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">

@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import { Globe } from "../components/Globe";
 import CopyEmailButton from "../components/DownloadButton";
 import { Frameworks } from "../components/Frameworks";
+import AuroraBackground from "../components/AuroraBackground";
 
 const About = () => {
   const grid2Container = useRef();
@@ -54,6 +55,7 @@ const About = () => {
 
   return (
     <section id="about" className="relative pt-20 pb-10">
+      <AuroraBackground />
       <h2 className="z-10 text-5xl font-extrabold text-left text-white mb-12">
         About Me
       </h2>
