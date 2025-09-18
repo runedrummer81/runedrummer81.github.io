@@ -5,7 +5,6 @@ function Navigation() {
   const links = [
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
-    { label: "Services", href: "#work" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -37,7 +36,7 @@ const Navbar = () => {
 
   return (
     <div
-      className="fixed inset-x-0 z-20 w-full 
+      className="fixed inset-x-0 z-60 w-full 
                 backdrop-blur-lg 
                 bg-black/40 
                 border-b border-[rgba(13,217,217,0.3)] 

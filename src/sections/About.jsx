@@ -55,7 +55,13 @@ const About = () => {
           About Me
         </h2>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, filter: "blur(12px)" }}
+          whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12"
+        >
           {/* Grid 1: Profile picture */}
           <div
             className="relative flex items-end grid-default-color grid-1 cursor-pointer rounded-lg overflow-hidden
@@ -70,9 +76,21 @@ const About = () => {
               alt="Picture of Rune Frisch"
               className="absolute inset-0 w-full h-full object-cover rounded-lg transition-transform duration-500 hover:scale-105"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-lg">
-              <p className="text-white text-2xl font-bold">
-                👆 Click to learn more!
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
+            {/* Overlay with glitching text */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-lg">
+              <p className="relative text-cyan-400 font-mono text-4xl sm:text-5xl font-extrabold tracking-widest drop-shadow-[0_0_25px_rgba(13,217,217,0.9)]">
+                {/* glitch layers */}
+                <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1.2s_infinite]">
+                  ACCESS PROFILE
+                </span>
+                <span className="absolute top-0 left-0 w-full h-full text-cyan-500 opacity-60 animate-[glitch2_1.2s_infinite]">
+                  ACCESS PROFILE
+                </span>
+                <span className="relative">ACCESS PROFILE</span>
+
+                {/* sci-fi scanline overlay */}
+                <span className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.08)_2px,rgba(13,217,217,0.08)_4px)] animate-[scanlines_2s_linear_infinite] pointer-events-none" />
               </p>
             </div>
           </div>
@@ -205,7 +223,7 @@ const About = () => {
               <Frameworks />
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* 🔹 Modal (Pop-up) */}

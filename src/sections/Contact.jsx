@@ -80,9 +80,9 @@ const Contact = () => {
                 alt={item.alt}
                 className="w-16 h-16 sm:w-20 sm:h-20 cursor-pointer 
                   rounded-full
-                  shadow-[0_0_20px_rgba(13,217,217,0.7)]
+                  shadow-[0_0_50px_rgba(13,217,217,0.7)]
                   hover:shadow-[0_0_40px_rgba(13,217,217,1)]
-                  transition-shadow duration-300"
+                  transition-shadow duration-400"
               />
             </motion.a>
           ))}

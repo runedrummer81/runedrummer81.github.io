@@ -131,12 +131,11 @@ const Projects = () => {
 
   return (
     <section id="projects" className="relative pt-10 pb-20">
-      <h2 className="relative z-10 text-5xl font-extrabold text-left text-white mb-12">
+      <h2 className="relative z-10 text-5xl font-extrabold text-left bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_20px_rgba(13,217,217,0.8)] mb-12 max-w-6xl mx-auto px-6">
         My Projects
       </h2>
 
-      <div className="absolute top-0 left-0 w-full h-full backdrop-blur-2xl" />
-
+      <div className="absolute inset-0 rounded-lg bg-gradient-to-tr from-cyan-300/20 via-purple-300/20 to-pink-300/20 pointer-events-none animate-pulse-slow"></div>
       {/* 3 project cards */}
       <motion.div
         className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6"
@@ -197,7 +196,7 @@ const Projects = () => {
                 setOpenCard(openCard === project.id ? null : project.id)
               }
               className={`absolute top-4 right-4 w-10 h-10 rounded-full grid place-items-center cursor-pointer
-        text-black z-20 overflow-hidden
+        text-black z-10 overflow-hidden
         transition-transform duration-500
         ${openCard === project.id ? "-rotate-45" : ""}
         bg-[hsl(var(--hue),90%,50%)]
@@ -269,16 +268,11 @@ const Projects = () => {
           transition={{ duration: 2, delay: 0.2 }}
           className="relative"
         >
-          <div
-            style={{
-              perspective: "2000px",
-            }}
-          >
+          <div style={{ perspective: "2000px" }}>
             <div
-              style={{
-                transform: "rotateY(30deg) rotateX(20deg) scale(0.8)",
-              }}
-              className="rounded-3xl shadow-2xl overflow-hidden"
+              style={{ transform: "rotateY(30deg) rotateX(20deg) scale(0.7)" }}
+              className="rounded-3xl shadow-2xl overflow-hidden
+                 w-full max-w-md md:max-w-lg mx-auto"
             >
               <video
                 src="/assets/improved-chef-claude.mp4"
@@ -301,7 +295,7 @@ const Projects = () => {
         >
           <h2 className="text-3xl font-bold mb-4">Chef Claude - Scrimba</h2>
           <p className="mb-4 text-lg leading-relaxed">
-            Chef-Claude is a recipe generator I built as part of Scrimba’s React
+            Chef-Claude is a recipe generator I built as part of Scrimba's React
             State course within the Learn React program. The project focuses on
             creating a clean, user-friendly interface while exploring API
             handling and React state management.
