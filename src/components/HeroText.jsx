@@ -43,12 +43,13 @@ const HeroText = () => {
             Passionate About
           </motion.p>
 
+          {/* FlipWords only on medium+ screens */}
           <motion.div
             variants={variants}
             initial="hidden"
             animate="visible"
             transition={{ delay: 1.4 }}
-            className="relative"
+            className="relative hidden md:block"
           >
             <motion.div
               animate={{ y: [0, -5, 0], opacity: [1, 0.95, 1] }}
@@ -56,7 +57,9 @@ const HeroText = () => {
             >
               <FlipWords
                 words={words}
-                className="font-black text-8xl orbitron text-white glitch-neon"
+                className="font-black text-8xl orbitron text-white
+               bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400
+               drop-shadow-[0_0_15px_rgba(13,217,217,0.8)] tracking-wider glitch-neon"
               />
             </motion.div>
           </motion.div>
@@ -106,22 +109,16 @@ const HeroText = () => {
             Passionate About
           </motion.p>
 
-          <motion.div
+          {/* Show only first word on mobile to prevent overflow */}
+          <motion.p
+            className="text-6xl font-black orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_15px_rgba(13,217,217,0.8)] tracking-wider glitch-neon"
             variants={variants}
             initial="hidden"
             animate="visible"
             transition={{ delay: 1.5 }}
           >
-            <motion.div
-              animate={{ y: [0, -4, 0], opacity: [1, 0.95, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              <FlipWords
-                words={words}
-                className="font-black text-6xl orbitron text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_15px_rgba(13,217,217,0.8)] tracking-wider glitch-neon"
-              />
-            </motion.div>
-          </motion.div>
+            {words[0]}
+          </motion.p>
 
           <motion.p
             className="text-3xl font-black orbitron text-neutral-300 drop-shadow-[0_0_5px_cyan]"

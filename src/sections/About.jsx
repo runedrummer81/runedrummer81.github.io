@@ -81,13 +81,13 @@ const About = () => {
             <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-lg">
               <p className="relative text-cyan-400 font-mono text-4xl sm:text-5xl font-extrabold tracking-widest drop-shadow-[0_0_25px_rgba(13,217,217,0.9)]">
                 {/* glitch layers */}
-                <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1.2s_infinite]">
+                <span className="absolute orbitron top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1.2s_infinite]">
                   ACCESS PROFILE
                 </span>
-                <span className="absolute top-0 left-0 w-full h-full text-cyan-500 opacity-60 animate-[glitch2_1.2s_infinite]">
+                <span className="absolute orbitron top-0 left-0 w-full h-full text-cyan-500 opacity-60 animate-[glitch2_1.2s_infinite]">
                   ACCESS PROFILE
                 </span>
-                <span className="relative">ACCESS PROFILE</span>
+                <span className="relative orbitron">ACCESS PROFILE</span>
 
                 {/* sci-fi scanline overlay */}
                 <span className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.08)_2px,rgba(13,217,217,0.08)_4px)] animate-[scanlines_2s_linear_infinite] pointer-events-none" />
@@ -116,32 +116,60 @@ const About = () => {
               {/* Optional scanlines / holographic effect */}
               <span className="absolute inset-0 pointer-events-none bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.05)_2px,rgba(13,217,217,0.05)_4px)] animate-[scanlines_2s_linear_infinite]" />
 
-              {/* Draggable cards */}
-              <Card
-                style={{ rotate: "30deg", top: "10%", left: "70%" }}
-                image="assets/veggie-logo.png"
-                containerRef={grid2Container}
-              />
-              <Card
-                style={{ rotate: "1deg", top: "64%", left: "5%" }}
-                image="assets/logos/world-of-warcraft-logo.svg"
-                containerRef={grid2Container}
-              />
-              <Card
-                style={{ rotate: "1deg", top: "14%", left: "15%" }}
-                image="assets/logos/twenty-dice.svg"
-                containerRef={grid2Container}
-              />
-              <Card
-                style={{ rotate: "1deg", top: "64%", left: "80%" }}
-                image="assets/logos/helldivers2-logo.svg"
-                containerRef={grid2Container}
-              />
-              <Card
-                style={{ rotate: "160deg", top: "70%", left: "25%" }}
-                image="assets/pokeball.png"
-                containerRef={grid2Container}
-              />
+              {/* Draggable Cards */}
+              {(() => {
+                const cards = [
+                  { image: "assets/logos/world-of-warcraft-logo.svg" },
+                  { image: "assets/logos/d20-dice.svg" },
+                  { image: "assets/logos/helldivers2-logo.svg" },
+                  { image: "assets/pokeball.png" },
+                  { image: "assets/book.svg" },
+                  { image: "assets/leaf.svg" },
+                  { image: "assets/cat.svg" },
+                  { image: "assets/playstation.svg" },
+                ];
+
+                const positions = [];
+
+                const getRandomPosition = () => {
+                  let top, left;
+                  let attempts = 0;
+
+                  do {
+                    top = Math.random() * 80 + 5; // top between 5% and 85%
+                    left = Math.random() * 80 + 5; // left between 5% and 85%
+                    attempts++;
+                  } while (
+                    positions.some(
+                      (pos) =>
+                        Math.abs(pos.top - top) < 15 &&
+                        Math.abs(pos.left - left) < 15
+                    ) &&
+                    attempts < 100
+                  );
+
+                  positions.push({ top, left });
+                  return { top, left };
+                };
+
+                return cards.map((card, i) => {
+                  const { top, left } = getRandomPosition();
+                  const rotate = Math.floor(Math.random() * 60) - 30; // random rotation -30° to +30°
+                  return (
+                    <Card
+                      key={i}
+                      style={{
+                        rotate: `${rotate}deg`,
+                        top: `${top}%`,
+                        left: `${left}%`,
+                      }}
+                      image={card.image}
+                      containerRef={grid2Container}
+                      className="rounded-full overflow-hidden"
+                    />
+                  );
+                });
+              })()}
             </div>
           </div>
 
@@ -384,10 +412,13 @@ const About = () => {
                 {/* Close button */}
                 <button
                   className="absolute top-4 right-4 
-        text-cyan-400 hover:text-white 
-        w-10 h-10 flex items-center justify-center 
-        text-2xl rounded-full hover:bg-cyan-500/10 transition cursor-pointer"
+             z-50   /* ensure it's on top of everything */
+             text-cyan-400 hover:text-white 
+             w-12 h-12 flex items-center justify-center 
+             text-2xl rounded-full hover:bg-cyan-500/20 
+             transition cursor-pointer"
                   onClick={() => setIsOpen(false)}
+                  aria-label="Close Menu"
                 >
                   ✖
                 </button>
