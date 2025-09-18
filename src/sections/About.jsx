@@ -8,9 +8,9 @@ import AuroraBackground from "../components/AuroraBackground";
 
 const About = () => {
   const grid2Container = useRef();
-  const [isOpen, setIsOpen] = useState(false); // 🔹 Modal state
+  const [isOpen, setIsOpen] = useState(false);
   const [activeAlbum, setActiveAlbum] = useState(1);
-  const [hovered, setHovered] = useState(false); // Hover state for grid 5
+  const [hovered, setHovered] = useState(false);
 
   const spotifyLinks = {
     1: "https://open.spotify.com/artist/21h3ZMAgqVovSFIqUoP3jv?si=ovagSKBPQD6EMkbQxkfi-A",
@@ -19,25 +19,18 @@ const About = () => {
 
   const youtubeLink = "https://www.youtube.com/watch?v=CWYFTknRYX0";
 
-  // 🔹 Auto-switch albums every 5s when modal is open
   useEffect(() => {
-    if (!isOpen) return; // only run when modal is open
-
+    if (!isOpen) return;
     const interval = setInterval(() => {
       setActiveAlbum((prev) => (prev === 3 ? 1 : prev + 1));
     }, 5000);
-
     return () => clearInterval(interval);
   }, [isOpen]);
 
-  // Prevent background scroll when modal is open
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        setIsOpen(false);
-      }
+      if (e.key === "Escape") setIsOpen(false);
     };
-
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
       document.addEventListener("keydown", handleKeyDown);
@@ -45,8 +38,6 @@ const About = () => {
       document.body.classList.remove("overflow-hidden");
       document.removeEventListener("keydown", handleKeyDown);
     }
-
-    // Cleanup on unmount
     return () => {
       document.body.classList.remove("overflow-hidden");
       document.removeEventListener("keydown", handleKeyDown);
@@ -54,165 +45,161 @@ const About = () => {
   }, [isOpen]);
 
   return (
-    <section id="about" className="relative pt-20 pb-10">
+    <section id="about" className="relative pt-20 pb-10 px-4 sm:px-6">
       <AuroraBackground />
-      <h2 className="z-10 text-5xl font-extrabold text-left text-white mb-12">
-        About Me
-      </h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12">
-        {/* Grid 1: Profile picture */}
-        <div
-          className="relative flex items-end grid-default-color grid-1 cursor-pointer rounded-lg overflow-hidden
-    bg-[hsl(185,90%,50%)]
-    shadow-[0_0_10px_3px_hsl(185,90%,50%)]
-    animate-pulse-glow"
-          onClick={() => setIsOpen(true)} // 🔹 Open modal when clicked
-        >
-          <img
-            src="assets/myself1.jpg"
-            alt="Picture of Rune Frisch"
-            className="absolute inset-0 w-full h-full object-cover rounded-lg transition-transform duration-500 hover:scale-105"
-          />
-          {/* Hover overlay */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-lg">
-            <p className="text-white text-2xl font-bold">
-              👆 Click to learn more!
-            </p>
-          </div>
-        </div>
+      <div className="max-w-screen-sm md:max-w-6xl mx-auto">
+        <h2 className="z-10 text-3xl sm:text-5xl font-extrabold text-left text-white mb-12">
+          About Me
+        </h2>
 
-        {/* Grid 2 */}
-        <div className="grid-default-color grid-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem] mt-12">
+          {/* Grid 1: Profile picture */}
           <div
-            ref={grid2Container}
-            className="flex items-center justify-center w-full h-full"
+            className="relative flex items-end grid-default-color grid-1 cursor-pointer rounded-lg overflow-hidden
+              bg-[hsl(185,90%,50%)]
+              shadow-[0_0_10px_3px_hsl(185,90%,50%)]
+              animate-pulse-glow"
+            onClick={() => setIsOpen(true)}
           >
-            <p className="flex items-end text-5xl text-gray-500">MY HOBBIES</p>
-            <Card
-              style={{ rotate: "30deg", top: "10%", left: "70%" }}
-              image="assets/veggie-logo.png"
-              containerRef={grid2Container}
+            <img
+              src="assets/myself1.jpg"
+              alt="Picture of Rune Frisch"
+              className="absolute inset-0 w-full h-full object-cover rounded-lg transition-transform duration-500 hover:scale-105"
             />
-            <Card
-              style={{ rotate: "1deg", top: "64%", left: "5%" }}
-              image="assets/logos/world-of-warcraft-logo.svg"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "1deg", top: "14%", left: "15%" }}
-              image="assets/logos/twenty-dice.svg"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "1deg", top: "64%", left: "80%" }}
-              image="assets/logos/helldivers2-logo.svg"
-              containerRef={grid2Container}
-            />
-            <Card
-              style={{ rotate: "160deg", top: "70%", left: "25%" }}
-              image="assets/pokeball.png"
-              containerRef={grid2Container}
-            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-lg">
+              <p className="text-white text-2xl font-bold">
+                👆 Click to learn more!
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Grid 3 */}
-        <div className="grid-default-black grid-3">
-          <div className="z-10 w-[50%]">
-            <p className="headtext">Time Zone</p>
-            <p className="subtext">
-              I'm based in Denmark, and open to remote work worldwide
-            </p>
+          {/* Grid 2: Hobbies */}
+          <div className="grid-default-color grid-2">
+            <div
+              ref={grid2Container}
+              className="flex flex-col md:flex-row items-center justify-center w-full h-full relative"
+            >
+              <p className="text-3xl md:text-5xl text-gray-500 mb-4 md:mb-0">
+                MY HOBBIES
+              </p>
+              <Card
+                style={{ rotate: "30deg", top: "10%", left: "70%" }}
+                image="assets/veggie-logo.png"
+                containerRef={grid2Container}
+              />
+              <Card
+                style={{ rotate: "1deg", top: "64%", left: "5%" }}
+                image="assets/logos/world-of-warcraft-logo.svg"
+                containerRef={grid2Container}
+              />
+              <Card
+                style={{ rotate: "1deg", top: "14%", left: "15%" }}
+                image="assets/logos/twenty-dice.svg"
+                containerRef={grid2Container}
+              />
+              <Card
+                style={{ rotate: "1deg", top: "64%", left: "80%" }}
+                image="assets/logos/helldivers2-logo.svg"
+                containerRef={grid2Container}
+              />
+              <Card
+                style={{ rotate: "160deg", top: "70%", left: "25%" }}
+                image="assets/pokeball.png"
+                containerRef={grid2Container}
+              />
+            </div>
           </div>
-          <figure className="absolute left-[30%] top-[10%]">
-            {/* <Globe /> */}
-          </figure>
-        </div>
 
-        {/* Grid 4 */}
-        <div className="grid-special-color grid-4">
-          <div className="flex flex-col items-center justify-center gap-4 size-full">
-            <h2 className="text-center font-bold text-2xl">
+          {/* Grid 3: Time zone */}
+          <div className="grid-default-black grid-3 flex items-center justify-center md:justify-start p-4 md:p-0">
+            <div className="z-10 w-full md:w-1/2">
+              <p className="headtext text-2xl md:text-4xl">Time Zone</p>
+              <p className="subtext text-sm md:text-base">
+                I'm based in Denmark, and open to remote work worldwide
+              </p>
+            </div>
+            <figure className="hidden md:block absolute left-[30%] top-[10%]">
+              {/* <Globe /> */}
+            </figure>
+          </div>
+
+          {/* Grid 4: Personality test */}
+          <div className="grid-special-color grid-4 flex flex-col items-center justify-center gap-4 p-4">
+            <h2 className="text-center font-bold text-2xl md:text-3xl">
               Want to know me a bit better?
             </h2>
-            <p>I’ve taken a personality test through Praice</p>
+            <p className="text-sm md:text-base">
+              I’ve taken a personality test through Praice
+            </p>
             <CopyEmailButton />
           </div>
-        </div>
 
-        {/* Grid 5 */}
-        <div
-          className="flex flex-wrap grid-default-color grid-5 relative"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          {/* Text content that hides on hover */}
+          {/* Grid 5: Tools */}
           <div
-            className={`z-10 w-[50%] transition-opacity ${
-              hovered ? "opacity-0" : "opacity-100"
-            }`}
+            className="flex flex-wrap grid-default-color grid-5 relative items-start md:items-center"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
           >
-            <p className="text-5xl">Tools</p>
-            <p className="headtext">
-              I have basic but solid experience with different languages,
-              frameworks, and tools that help me build functional applications.
+            <div
+              className={`z-10 w-full md:w-1/2 transition-opacity ${
+                hovered ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              <p className="text-3xl md:text-5xl mb-2">Tools</p>
+              <p className="headtext text-sm md:text-base">
+                I bring ideas to life using versatile frameworks and languages.
+              </p>
+            </div>
+
+            <p
+              className={`absolute top-10 left-1/2 transform -translate-x-1/2 text-2xl md:text-xl font-bold transition-opacity pointer-events-none ${
+                hovered ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              Weapons of choice
             </p>
-          </div>
 
-          {/* Hover heading */}
-          <p
-            className={`absolute top-10 left-1/2 transform -translate-x-1/2 text-5xl font-bold transition-opacity pointer-events-none ${
-              hovered ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            Weapons of choice
-          </p>
+            <div
+              key={hovered ? "hovered" : "idle"}
+              className={`absolute top-32 md:top-28 left-1/2 transform -translate-x-1/2 grid grid-cols-4 md:grid-cols-8 grid-rows-2 gap-6 md:gap-10 pointer-events-none w-full md:w-160 ${
+                hovered ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {[
+                "/assets/logos/css3.svg",
+                "/assets/logos/html5.svg",
+                "/assets/logos/javascript.svg",
+                "/assets/logos/react.svg",
+                "/assets/logos/github.svg",
+                "/assets/logos/tailwindcss.svg",
+                "/assets/logos/visualstudiocode.svg",
+                "/assets/logos/figma-icon.svg",
+                "/assets/logos/visualstudiocode.svg",
+                "/assets/logos/davinci-resolve-12.svg",
+                "/assets/logos/audacity-icon.svg",
+                "/assets/logos/adobe-illustrator-icon.svg",
+                "/assets/logos/adobe-after-effects-icon.svg",
+                "/assets/logos/adobe-photoshop-icon.svg",
+                "/assets/logos/adobe-dimension-icon.svg",
+              ].map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt="logo"
+                  style={{ animationDelay: `${i * 0.03}s` }}
+                  className="w-10 md:w-12 h-10 md:h-12 opacity-0 fade-in"
+                />
+              ))}
+            </div>
 
-          {/* Logos container */}
-          <div
-            key={hovered ? "hovered" : "idle"} // 🔑 re-mounts on hover toggle
-            className={`absolute top-28 left-1/2 transform -translate-x-1/2 grid grid-cols-8 grid-rows-2 gap-10 transition-opacity pointer-events-none w-160 ${
-              hovered ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            {[
-              "/assets/logos/css3.svg",
-              "/assets/logos/html5.svg",
-              "/assets/logos/javascript.svg",
-              "/assets/logos/react.svg",
-              "/assets/logos/github.svg",
-              "/assets/logos/tailwindcss.svg",
-              "/assets/logos/visualstudiocode.svg",
-              "/assets/logos/figma-icon.svg",
-              "/assets/logos/visualstudiocode.svg",
-              "/assets/logos/davinci-resolve-12.svg",
-              "/assets/logos/audacity-icon.svg",
-              "/assets/logos/adobe-illustrator-icon.svg",
-              "/assets/logos/adobe-after-effects-icon.svg",
-              "/assets/logos/adobe-photoshop-icon.svg",
-              "/assets/logos/adobe-dimension-icon.svg",
-            ].map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt="logo"
-                style={{ animationDelay: `${i * 0.03}s` }}
-                className="w-12 h-12 opacity-0 fade-in"
-              />
-            ))}
-          </div>
-
-          {/* Frameworks component, hides on hover */}
-          <div
-            className={`absolute top-1/2 right-0 transform -translate-y-1/2 transition-opacity ${
-              hovered ? "opacity-0" : "opacity-100"
-            }`}
-            style={{
-              width: "0%", // keeps hidden / collapsed
-              height: "80%",
-            }}
-          >
-            <Frameworks />
+            <div
+              className={`absolute top-1/2 right-0 transform -translate-y-1/2 transition-opacity hidden md:block ${
+                hovered ? "opacity-0" : "opacity-100"
+              }`}
+              style={{ width: "0%", height: "80%" }}
+            >
+              <Frameworks />
+            </div>
           </div>
         </div>
       </div>
@@ -258,71 +245,68 @@ const About = () => {
                   className="w-full md:w-auto md:max-w-full rounded-lg mb-6 object-cover mx-auto"
                 />
 
-                {/* Responsive flex container for modal text + image */}
+                {/* Modal text content */}
                 <div className="flex flex-col md:flex-row items-start gap-6">
-                  {/* Text container fills available space */}
-                  <div className="flex-1">
-                    <p className="mb-4 text-neutral-300">
-                      Besides being passionate about programming and studying
-                      multimedia design, I also have a rich background in music.
-                      I've performed over 200 gigs internationally, including
-                      major festivals, and some of the songs I’ve recorded with
-                      various bands have reached overseveral millions streams.
+                  {/* Text container */}
+                  <div className="flex-1 space-y-4">
+                    <p className="text-neutral-300 text-sm md:text-base">
+                      I’m passionate about programming and multimedia design,
+                      with a strong background in music. I’ve performed over 200
+                      gigs worldwide and some of my recordings have millions of
+                      streams.
                     </p>
-                    <p className="mb-4 text-neutral-300">
-                      Creativity and enthusiasm drive everything I do, whether
-                      it’s writing code or composing tunes, and I love blending
-                      both worlds to craft unique digital experiences.
+                    <p className="text-neutral-300 text-sm md:text-base">
+                      Creativity drives everything I do, whether coding or
+                      composing, and I love blending both worlds to craft unique
+                      digital experiences.
                     </p>
-                    <div>
-                      <p className="text-neutral-300 font-extrabold">
+
+                    {/* Socials */}
+                    <div className="mt-2">
+                      <p className="text-neutral-300 font-semibold mb-1">
                         My Socials:
                       </p>
-                      <div className="flex gap-1.5">
+                      <div className="flex gap-3">
                         <a
                           href="https://www.instagram.com/runefrisch/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block"
                         >
                           <img
                             src="/assets/logos/instagram.svg"
-                            alt="Instagram logo"
-                            className="w-8 h-8 mt-1"
+                            alt="Instagram"
+                            className="w-7 h-7"
                           />
                         </a>
                         <a
                           href="https://www.facebook.com/rune.frisch"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block ml-4"
                         >
                           <img
                             src="/assets/logos/facebook.svg"
-                            alt="Facebook logo"
-                            className="w-8 h-8 mt-1"
+                            alt="Facebook"
+                            className="w-7 h-7"
                           />
                         </a>
                         <a
                           href="https://www.linkedin.com/in/rune-frisch-1a5414383/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block ml-4"
                         >
                           <img
                             src="/assets/logos/linkedin.svg"
-                            alt="LinkedIn logo"
-                            className="w-8 h-8 mt-1"
+                            alt="LinkedIn"
+                            className="w-7 h-7"
                           />
                         </a>
                       </div>
                     </div>
                   </div>
 
-                  {/* Album toggle container */}
-                  <div className="flex flex-col gap-4">
-                    {/* Large active media display (animated) */}
-                    <div className="relative w-56 h-56 mx-auto md:mx-0">
+                  {/* Album / Media container */}
+                  <div className="flex flex-col gap-4 w-full md:w-56">
+                    <div className="relative w-full h-56 mx-auto md:mx-0">
                       <AnimatePresence mode="wait">
                         {activeAlbum === 3 ? (
                           <motion.a
@@ -361,11 +345,7 @@ const About = () => {
                                   ? "/assets/forever-still-cover1.jpg"
                                   : "/assets/cover-art2.jpg"
                               }
-                              alt={
-                                activeAlbum === 1
-                                  ? "album cover 1"
-                                  : "album cover 2"
-                              }
+                              alt={`album cover ${activeAlbum}`}
                               className="w-full h-full object-cover rounded-lg cursor-pointer hover:scale-105"
                               draggable={false}
                             />
@@ -375,37 +355,30 @@ const About = () => {
                     </div>
 
                     {/* Toggle thumbnails */}
-                    <div className="flex gap-4 justify-center md:justify-start">
-                      <img
-                        onClick={() => setActiveAlbum(1)}
-                        src="/assets/forever-still-cover1.jpg"
-                        alt="album cover 1 thumbnail"
-                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer transition-opacity ${
-                          activeAlbum === 1
-                            ? "opacity-100 border-2 border-indigo-400"
-                            : "opacity-50"
-                        } hover:opacity-100`}
-                      />
-                      <img
-                        onClick={() => setActiveAlbum(2)}
-                        src="/assets/cover-art2.jpg"
-                        alt="album cover 2 thumbnail"
-                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer transition-opacity ${
-                          activeAlbum === 2
-                            ? "opacity-100 border-2 border-indigo-400"
-                            : "opacity-50"
-                        } hover:opacity-100`}
-                      />
-                      <img
-                        onClick={() => setActiveAlbum(3)}
-                        src="/assets/yt-cover2.webp"
-                        alt="youtube drum cover thumbnail"
-                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer transition-opacity ${
-                          activeAlbum === 3
-                            ? "opacity-100 border-2 border-red-600"
-                            : "opacity-50"
-                        } hover:opacity-100`}
-                      />
+                    <div className="flex gap-3 justify-center md:justify-start">
+                      {[1, 2, 3].map((i) => {
+                        const src =
+                          i === 1
+                            ? "/assets/forever-still-cover1.jpg"
+                            : i === 2
+                            ? "/assets/cover-art2.jpg"
+                            : "/assets/yt-cover2.webp";
+                        const borderColor =
+                          i === 3 ? "border-red-600" : "border-indigo-400";
+                        return (
+                          <img
+                            key={i}
+                            onClick={() => setActiveAlbum(i)}
+                            src={src}
+                            alt={`thumbnail ${i}`}
+                            className={`w-12 h-12 object-cover rounded-lg cursor-pointer transition-opacity ${
+                              activeAlbum === i
+                                ? `opacity-100 border-2 ${borderColor}`
+                                : "opacity-50"
+                            } hover:opacity-100`}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
