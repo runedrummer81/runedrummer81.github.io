@@ -48,7 +48,7 @@ const About = () => {
     <section id="about" className="relative pt-20 pb-10 px-4 sm:px-6">
       <AuroraBackground />
       <div className="max-w-screen-sm md:max-w-6xl mx-auto">
-        <h2 className="z-10 text-3xl sm:text-5xl font-extrabold text-left text-white mb-12">
+        <h2 className="z-10 text-3xl sm:text-5xl font-extrabold text-left text-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_20px_rgba(13,217,217,0.8)] mb-12">
           About Me
         </h2>
 
