@@ -146,7 +146,7 @@ const About = () => {
               }`}
             >
               <p className="text-3xl md:text-5xl mb-2">Tools</p>
-              <p className="headtext text-sm md:text-base">
+              <p className="headtext text-sm md:text-base hidden md:block">
                 I bring ideas to life using versatile frameworks and languages.
               </p>
             </div>
@@ -193,7 +193,7 @@ const About = () => {
             </div>
 
             <div
-              className={`absolute top-1/2 right-0 transform -translate-y-1/2 transition-opacity hidden md:block ${
+              className={`absolute top-1/2 right-0 transform -translate-y-1/2 transition-opacity  ${
                 hovered ? "opacity-0" : "opacity-100"
               }`}
               style={{ width: "0%", height: "80%" }}
