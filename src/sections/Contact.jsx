@@ -1,24 +1,45 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import CopyEmailButton from "../components/CopyEmailButton";
+
+const NUM_STARS = 100; // number of stars
 
 const Contact = () => {
   return (
-    <section
-      id="contact"
-      className="relative bg-black text-white overflow-hidden"
-    >
-      {/* glowing grid background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(13,217,217,0.08),transparent_70%)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(13,217,217,0.05)_1px,transparent_1px)] bg-[length:30px_30px] opacity-40 pointer-events-none" />
+    <section id="contact" className="relative text-white overflow-hidden">
+      {/* Hyperspace star streaks */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+        {[...Array(NUM_STARS)].map((_, i) => {
+          const size = Math.random() * 2 + 1; // 1-3px
+          const duration = Math.random() * 3 + 2; // 2-5s
+          const top = Math.random() * 100;
+          const left = Math.random() * 100;
+          const opacity = Math.random() * 0.5 + 0.3;
+          return (
+            <div
+              key={i}
+              className="absolute bg-cyan-400 rounded-full"
+              style={{
+                width: `${size}px`,
+                height: `${size}px`,
+                top: `${top}%`,
+                left: `${left}%`,
+                opacity,
+                animation: `hyperspace ${duration}s linear infinite`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          );
+        })}
+      </div>
 
-      <div className="relative flex flex-col items-center justify-center min-h-[40vh] p-10 z-10">
+      <div className="relative flex flex-col items-center justify-center min-h-[50vh] p-10 z-10">
         {/* headline */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-3xl md:text-6xl font-extrabold tracking-wide mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_20px_rgba(13,217,217,0.8)]"
+          className="text-3xl md:text-6xl font-extrabold tracking-wide mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_25px_rgba(13,217,217,0.9)]"
         >
           Got a project or idea? Let’s connect.
         </motion.h2>
@@ -59,14 +80,24 @@ const Contact = () => {
                 alt={item.alt}
                 className="w-16 h-16 sm:w-20 sm:h-20 cursor-pointer 
                   rounded-full
-                  shadow-[0_0_16px_rgba(13,217,217,0.6)]
-                  hover:shadow-[0_0_32px_rgba(13,217,217,0.9)]
+                  shadow-[0_0_20px_rgba(13,217,217,0.7)]
+                  hover:shadow-[0_0_40px_rgba(13,217,217,1)]
                   transition-shadow duration-300"
               />
             </motion.a>
           ))}
         </div>
       </div>
+
+      <style>
+        {`
+          @keyframes hyperspace {
+            0% { transform: translateX(0) scaleX(1); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateX(200vw) scaleX(3); opacity: 0; }
+          }
+        `}
+      </style>
     </section>
   );
 };

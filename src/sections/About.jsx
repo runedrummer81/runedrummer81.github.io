@@ -46,9 +46,12 @@ const About = () => {
 
   return (
     <section id="about" className="relative pt-20 pb-10 px-4 sm:px-6">
+      {/* Full-width gradient overlay */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-64 bg-gradient-to-b from-black via-black/50 to-transparent z-0"></div>
       <AuroraBackground />
-      <div className="max-w-screen-sm md:max-w-6xl mx-auto">
-        <h2 className="z-10 text-3xl sm:text-5xl font-extrabold text-left text-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_20px_rgba(13,217,217,0.8)] mb-12">
+
+      <div className="relative z-10 max-w-screen-sm md:max-w-6xl mx-auto">
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-left bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_20px_rgba(13,217,217,0.8)] mb-12">
           About Me
         </h2>
 
@@ -56,9 +59,10 @@ const About = () => {
           {/* Grid 1: Profile picture */}
           <div
             className="relative flex items-end grid-default-color grid-1 cursor-pointer rounded-lg overflow-hidden
-              bg-[hsl(185,90%,50%)]
-              shadow-[0_0_10px_3px_hsl(185,90%,50%)]
-              animate-pulse-glow"
+             bg-[hsl(185,90%,50%)]
+             shadow-[0_0_10px_3px_rgba(13,217,217,0.3)]
+             transition-shadow duration-300
+             hover:shadow-[0_0_20px_8px_rgba(13,217,217,0.6)]"
             onClick={() => setIsOpen(true)}
           >
             <img
