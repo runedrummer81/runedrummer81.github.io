@@ -225,7 +225,7 @@ const Projects = () => {
                     : "circle(8px at 88% 9%)",
               }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className={`absolute inset-0 text-white p-8 backdrop-blur-md bg-black/30 flex flex-col justify-between ${
+              className={`absolute inset-0 text-white p-8 backdrop-blur-md bg-black/30 flex flex-col justify-between overflow-y-auto max-h-full ${
                 openCard === project.id
                   ? "pointer-events-auto"
                   : "pointer-events-none"
