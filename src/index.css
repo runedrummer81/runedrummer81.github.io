@@ -81,6 +81,148 @@
   }
 }
 
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(13, 217, 217, 0.4),
+      0 0 40px rgba(13, 217, 217, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(13, 217, 217, 0.8),
+      0 0 60px rgba(13, 217, 217, 0.4);
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 4px;
+  }
+}
+
+@keyframes glitch12 {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(2px);
+  }
+  60% {
+    transform: translateX(-1px);
+  }
+  80% {
+    transform: translateX(1px);
+  }
+}
+
+@keyframes glitch22 {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-1px);
+  }
+  50% {
+    transform: translateX(1px);
+  }
+  75% {
+    transform: translateX(-1px);
+  }
+}
+
+@keyframes scanlines2 {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 4px;
+  }
+}
+
+@keyframes top-to-bottom {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes bottom-to-top {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+}
+
+@keyframes left-to-right {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes right-to-left {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+}
+
+.animate-top-to-bottom {
+  animation-name: top-to-bottom;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.animate-bottom-to-top {
+  animation-name: bottom-to-top;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.animate-left-to-right {
+  animation-name: left-to-right;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.animate-right-to-left {
+  animation-name: right-to-left;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 @theme {
   --color-primary: #030412;
   --color-midnight: #06091f;
@@ -203,7 +345,7 @@ html {
 }
 
 .grid-special-color {
-  @apply p-6 bg-gradient-to-b from-royal to-lavender rounded-2xl;
+  @apply p-6 bg-gradient-to-b from-royal to-purple-900 rounded-2xl;
 }
 .grid-black-color {
   @apply p-6 bg-gradient-to-tl from-[#3A3A3A] via-[#242424] to-[#3A3A3A] rounded-2xl;

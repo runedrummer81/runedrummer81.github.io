@@ -95,15 +95,28 @@ const About = () => {
             </div>
           </div>
 
-          {/* Grid 2: Hobbies */}
-          <div className="grid-default-color grid-2">
+          <div className="grid-default-color grid-2 relative">
             <div
               ref={grid2Container}
-              className="flex flex-col md:flex-row items-center justify-center w-full h-full relative"
+              className="flex flex-col md:flex-row items-center justify-center w-full h-full relative
+      rounded-lg border-2 border-cyan-400/40 shadow-[0_0_20px_rgba(13,217,217,0.5)]
+      bg-black/20 backdrop-blur-md overflow-hidden"
             >
-              <p className="text-3xl md:text-5xl text-gray-500 mb-4 md:mb-0">
-                MY HOBBIES
+              {/* Glitchy title */}
+              <p className="relative text-3xl md:text-5xl font-extrabold mb-4 md:mb-0 text-gray-500">
+                <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1s_infinite]">
+                  MY HOBBIES
+                </span>
+                <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-60 animate-[glitch2_1s_infinite]">
+                  MY HOBBIES
+                </span>
+                <span className="relative">MY HOBBIES</span>
               </p>
+
+              {/* Optional scanlines / holographic effect */}
+              <span className="absolute inset-0 pointer-events-none bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.05)_2px,rgba(13,217,217,0.05)_4px)] animate-[scanlines_2s_linear_infinite]" />
+
+              {/* Draggable cards */}
               <Card
                 style={{ rotate: "30deg", top: "10%", left: "70%" }}
                 image="assets/veggie-logo.png"
@@ -132,55 +145,162 @@ const About = () => {
             </div>
           </div>
 
-          {/* Grid 3: Time zone */}
-          <div className="grid-default-black grid-3 flex items-center justify-center md:justify-start p-4 md:p-0">
+          {/* Grid 3: Digital storm / multi-directional character streams */}
+          <div className="grid-default-black grid-3 relative flex items-center justify-center md:justify-start p-4 overflow-hidden">
+            {/* Main glitchy title */}
             <div className="z-10 w-full md:w-1/2">
-              <p className="headtext text-2xl md:text-4xl">Time Zone</p>
-              <p className="subtext text-sm md:text-base">
-                I'm based in Denmark, and open to remote work worldwide
+              <p className="relative text-3xl md:text-5xl font-bold mb-2">
+                <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1s_infinite]">
+                  Time Zone
+                </span>
+                <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-60 animate-[glitch2_1s_infinite]">
+                  Time Zone
+                </span>
+                <span className="relative">Time Zone</span>
+              </p>
+              <p className="relative text-sm md:text-base">
+                <span
+                  className="absolute text-2xl top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1s_infinite]"
+                  style={{ animationDelay: "0s" }}
+                >
+                  Living and coding from Aarhus, <strong>Denmark</strong>.
+                </span>
+                <span
+                  className="absolute text-2xl top-0 left-0 w-full h-full text-cyan-400 opacity-60 animate-[glitch2_1s_infinite]"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  Living and coding from Aarhus, <strong>Denmark</strong>.
+                </span>
+                <span className="relative text-2xl text-gray-300">
+                  Living and coding from Aarhus, <strong>Denmark</strong>.
+                </span>
               </p>
             </div>
-            <figure className="hidden md:block absolute left-[30%] top-[10%]">
-              {/* <Globe /> */}
-            </figure>
+
+            {/* Multi-directional digital storm */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(40)].map((_, i) => {
+                const directions = [
+                  "top-to-bottom",
+                  "bottom-to-top",
+                  "left-to-right",
+                  "right-to-left",
+                ];
+                const dir =
+                  directions[Math.floor(Math.random() * directions.length)];
+                return (
+                  <span
+                    key={i}
+                    className={`absolute text-cyan-400 font-mono text-xs md:text-sm opacity-60 animate-${dir}`}
+                    style={{
+                      left:
+                        dir.includes("left") || dir.includes("right")
+                          ? `${-10 + Math.random() * 120}%`
+                          : `${Math.random() * 100}%`,
+                      top:
+                        dir.includes("top") || dir.includes("bottom")
+                          ? `${-10 + Math.random() * 120}%`
+                          : `${Math.random() * 100}%`,
+                      animationDelay: `${Math.random() * 5}s`,
+                      animationDuration: `${2 + Math.random() * 5}s`,
+                    }}
+                  >
+                    {Array.from(
+                      { length: 3 + Math.floor(Math.random() * 3) },
+                      () =>
+                        String.fromCharCode(33 + Math.floor(Math.random() * 94))
+                    ).join("")}
+                  </span>
+                );
+              })}
+            </div>
           </div>
 
           {/* Grid 4: Personality test */}
-          <div className="grid-special-color grid-4 flex flex-col items-center justify-center gap-4 p-4">
-            <h2 className="text-center font-bold text-2xl md:text-3xl">
-              Want to know me a bit better?
+          <div
+            className="grid-special-color grid-4 relative flex flex-col items-center justify-center gap-4 p-6
+    rounded-lg border-2 border-cyan-400/40 shadow-[0_0_20px_rgba(13,217,217,0.5)]
+    bg-black/20 backdrop-blur-md overflow-hidden"
+          >
+            {/* Glitchy title */}
+            <h2 className="relative text-center font-bold text-2xl md:text-3xl">
+              <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1s_infinite]">
+                Curious about me?
+              </span>
+              <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-60 animate-[glitch2_1s_infinite]">
+                Curious about me?
+              </span>
+              <span className="relative">Curious about me?</span>
             </h2>
-            <p className="text-sm md:text-base">
-              I’ve taken a personality test through Praice
+
+            {/* Optional scanlines / holographic overlay */}
+            <span className="absolute inset-0 pointer-events-none bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.05)_2px,rgba(13,217,217,0.05)_4px)] animate-[scanlines_2s_linear_infinite]" />
+
+            {/* Description */}
+            <p className="relative z-10 text-sm md:text-base text-center">
+              {/* Glitch layers */}
+              <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-70 animate-[glitch1_1.2s_infinite]">
+                I've taken a personality test with Praice, download the results
+              </span>
+              <span className="absolute top-0 left-0 w-full h-full text-cyan-500 opacity-60 animate-[glitch2_1.2s_infinite]">
+                I've taken a personality test with Praice, download the results
+              </span>
+              <span className="relative text-gray-200">
+                I've taken a personality test with Praice, download the results
+              </span>
             </p>
-            <CopyEmailButton />
+
+            {/* Interactive button */}
+            <div className="relative z-10">
+              <CopyEmailButton />
+            </div>
           </div>
 
           {/* Grid 5: Tools */}
+          {/* Grid 5: Tools */}
           <div
-            className="flex flex-wrap grid-default-color grid-5 relative items-start md:items-center"
+            className="flex flex-wrap grid-default-color grid-5 relative items-start md:items-center
+    rounded-lg p-6 border-2 border-cyan-400/40 shadow-[0_0_20px_rgba(13,217,217,0.5)]
+    bg-black/20 backdrop-blur-md overflow-hidden"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
+            {/* Glitchy main title */}
             <div
-              className={`z-10 w-full md:w-1/2 transition-opacity ${
-                hovered ? "opacity-0" : "opacity-100"
+              className={`relative z-10 w-full md:w-1/2 mb-4 md:mb-0 transition-opacity duration-300 ${
+                hovered ? "opacity-0 pointer-events-none" : "opacity-100"
               }`}
             >
-              <p className="text-3xl md:text-5xl mb-2">Tools</p>
-              <p className="headtext text-sm md:text-base hidden md:block">
+              <p className="relative text-3xl md:text-5xl font-bold mb-2">
+                <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1s_infinite]">
+                  Tools
+                </span>
+                <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-60 animate-[glitch2_1s_infinite]">
+                  Tools
+                </span>
+                <span className="relative">Tools</span>
+              </p>
+              <p className="headtext text-sm md:text-base hidden md:block text-gray-300">
                 I bring ideas to life using versatile frameworks and languages.
               </p>
             </div>
 
+            {/* Glitchy hover subtitle */}
             <p
-              className={`absolute top-10 left-1/2 transform -translate-x-1/2 text-2xl md:text-xl font-bold transition-opacity pointer-events-none ${
+              className={`absolute top-10 left-1/2 transform -translate-x-1/2 text-2xl md:text-xl font-bold transition-opacity pointer-events-none z-20 ${
                 hovered ? "opacity-100" : "opacity-0"
               }`}
             >
-              Weapons of choice
+              <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1s_infinite]">
+                Weapons of choice
+              </span>
+              <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-60 animate-[glitch2_1s_infinite]">
+                Weapons of choice
+              </span>
+              <span className="relative">Weapons of choice</span>
             </p>
 
+            {/* Tools icons */}
             <div
               key={hovered ? "hovered" : "idle"}
               className={`absolute top-32 md:top-28 left-1/2 transform -translate-x-1/2 grid grid-cols-4 md:grid-cols-8 grid-rows-2 gap-6 md:gap-10 pointer-events-none w-full md:w-160 ${
@@ -214,6 +334,9 @@ const About = () => {
               ))}
             </div>
 
+            {/* Optional holographic / scanline overlay */}
+            <span className="absolute inset-0 pointer-events-none bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.05)_2px,rgba(13,217,217,0.05)_4px)] animate-[scanlines_2s_linear_infinite]" />
+            {/* Original Frameworks component (kept intact) */}
             <div
               className={`absolute top-1/2 right-0 transform -translate-y-1/2 transition-opacity  ${
                 hovered ? "opacity-0" : "opacity-100"
@@ -247,19 +370,33 @@ const About = () => {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <div className="relative bg-neutral-900 text-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh]">
+              <div
+                className="relative rounded-2xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] 
+      bg-black/70 backdrop-blur-md 
+      border border-cyan-400/40 
+      shadow-[0_0_30px_rgba(13,217,217,0.7)]"
+              >
+                {/* glowing border animation */}
+                <span className="absolute inset-0 rounded-2xl border-2 border-cyan-400/50 animate-[glowPulse_3s_ease-in-out_infinite] pointer-events-none"></span>
+
+                {/* subtle scanline overlay */}
+                <span className="absolute inset-0 rounded-2xl bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.08)_2px,rgba(13,217,217,0.08)_4px)] animate-[scanlines_2s_linear_infinite] pointer-events-none"></span>
+
                 {/* Close button */}
                 <button
                   className="absolute top-4 right-4 
-             text-neutral-400 hover:text-white 
-             w-10 h-10 flex items-center justify-center 
-             text-2xl rounded-full hover:bg-neutral-800 transition"
+        text-cyan-400 hover:text-white 
+        w-10 h-10 flex items-center justify-center 
+        text-2xl rounded-full hover:bg-cyan-500/10 transition cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   ✖
                 </button>
 
-                <h2 className="text-3xl font-bold mb-4">About Me</h2>
+                {/* modal inner content */}
+                <h2 className="text-3xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_15px_rgba(13,217,217,0.7)]">
+                  About Me
+                </h2>
 
                 <img
                   src="/assets/svartsot1.jpg"

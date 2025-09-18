@@ -39,16 +39,25 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-3xl md:text-6xl font-extrabold tracking-wide mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_25px_rgba(13,217,217,0.9)]"
+          className="text-3xl text-center md:text-6xl font-extrabold tracking-wide mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 drop-shadow-[0_0_25px_rgba(13,217,217,0.9)]"
         >
-          Got a project or idea? Let’s connect.
+          Got a project or idea? Let's{" "}
+          <span className="relative inline-block">
+            <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-40 animate-[glitch1_1.2s_infinite]">
+              connect
+            </span>
+            <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-30 animate-[glitch2_1.2s_infinite]">
+              connect
+            </span>
+            <span className="relative text-cyan-100">connect</span>
+          </span>
         </motion.h2>
 
         {/* email button */}
         <CopyEmailButton />
 
         {/* social icons */}
-        <div className="flex gap-12 justify-center mt-12">
+        <div className="flex gap-12 justify-center mt-20">
           {[
             {
               href: "https://www.facebook.com/rune.frisch",
@@ -73,7 +82,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.2, rotate: 2 }}
               whileTap={{ scale: 0.9 }}
-              className="relative"
+              className="relative "
             >
               <img
                 src={item.src}
