@@ -272,10 +272,13 @@
 }
 body {
   background: #030412;
-  font-family: "Futura", sans-serif;
   color: white;
   scroll-behavior: smooth;
   overflow-x: hidden;
+}
+
+p {
+  font-family: "Futura", sans-serif;
 }
 
 html {
@@ -349,4 +352,58 @@ html {
 }
 .grid-black-color {
   @apply p-6 bg-gradient-to-tl from-[#3A3A3A] via-[#242424] to-[#3A3A3A] rounded-2xl;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-ExtraBold.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-Medium.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-SemiBold.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Apply to headings only */
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Orbitron", sans-serif;
+}
+
+.orbitron {
+  font-family: "Orbitron", sans-serif;
 }

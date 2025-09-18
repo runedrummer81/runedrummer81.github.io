@@ -257,7 +257,6 @@ const About = () => {
           </div>
 
           {/* Grid 5: Tools */}
-          {/* Grid 5: Tools */}
           <div
             className="flex flex-wrap grid-default-color grid-5 relative items-start md:items-center
     rounded-lg p-6 border-2 border-cyan-400/40 shadow-[0_0_20px_rgba(13,217,217,0.5)]
@@ -408,15 +407,15 @@ const About = () => {
                 <div className="flex flex-col md:flex-row items-start gap-6">
                   {/* Text container */}
                   <div className="flex-1 space-y-4">
-                    <p className="text-neutral-300 text-sm md:text-base">
-                      I’m passionate about programming and multimedia design,
-                      with a strong background in music. I’ve performed over 200
-                      gigs worldwide and some of my recordings have millions of
-                      streams.
+                    <p className="text-cyan-300 text-sm md:text-base font-medium tracking-wide drop-shadow-[0_0_5px_cyan]">
+                      Beyond my passion for programming and multimedia design, I
+                      have a solid background in music. I've played over 200
+                      gigs with different bands, and some of my recordings have
+                      reached millions of streams.
                     </p>
-                    <p className="text-neutral-300 text-sm md:text-base">
+                    <p className="text-cyan-300 text-sm md:text-base font-medium tracking-wide drop-shadow-[0_0_5px_cyan]">
                       Creativity drives everything I do, whether coding or
-                      composing, and I love blending both worlds to craft unique
+                      composing. I love blending both worlds to craft unique
                       digital experiences.
                     </p>
 

@@ -18,7 +18,7 @@ function Navigation() {
           className="relative group"
         >
           <a
-            className="nav-link text-neutral-400 hover:text-cyan-400 transition-colors tracking-wide uppercase"
+            className="nav-link orbitron text-neutral-400 hover:text-cyan-400 transition-colors tracking-wide uppercase drop-shadow-[0_0_8px_rgba(13,217,217,0.7)]"
             href={link.href}
           >
             {link.label}
@@ -47,7 +47,7 @@ const Navbar = () => {
           {/* Logo */}
           <a
             href="/"
-            className="text-2xl font-extrabold tracking-wider 
+            className="orbitron text-2xl font-extrabold tracking-wider 
              text-[rgb(13,217,217)] 
              drop-shadow-[0_0_16px_rgba(13,217,217,0.8)] 
              hover:text-white transition"
