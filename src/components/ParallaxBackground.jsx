@@ -1,5 +1,4 @@
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import Stars from "./Stars";
 
 const ParallaxBackground = () => {
   const { scrollYProgress } = useScroll();
@@ -20,7 +19,7 @@ const ParallaxBackground = () => {
             backgroundSize: "cover",
           }}
         />
-        <Stars count={200} />
+
         {/* Mountain Layer 3 */}
         <motion.div
           className="absolute inset-0 -z-40"
