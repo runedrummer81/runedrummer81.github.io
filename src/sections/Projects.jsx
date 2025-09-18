@@ -143,7 +143,7 @@ const Projects = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true, amount: 0.2 }} // triggers only once when ~20% is visible
+        viewport={{ once: true, amount: 0.2 }}
       >
         {projects.map((project, index) => (
           <motion.article
@@ -157,7 +157,7 @@ const Projects = () => {
             transition={{ duration: 0.6, delay: index * 0.15 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <div className="relative w-full h-160 rounded-3xl overflow-hidden">
+            <div className="relative w-full h-96 sm:h-160 rounded-3xl overflow-hidden">
               {/* project image */}
               <img
                 src={project.img}
@@ -181,8 +181,12 @@ const Projects = () => {
             {/* shadow gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90" />
 
-            {/* name + role */}
-            <div className="absolute left-6 bottom-8 text-white z-10">
+            {/* bottom title + role (hide when info panel is open) */}
+            <div
+              className={`absolute left-6 bottom-8 text-white z-10 transition-opacity duration-300 ${
+                openCard === project.id ? "opacity-0" : "opacity-100"
+              }`}
+            >
               <h2 className="text-2xl font-bold">{project.name}</h2>
               <span className="block text-sm opacity-80">{project.role}</span>
             </div>
@@ -193,13 +197,13 @@ const Projects = () => {
                 setOpenCard(openCard === project.id ? null : project.id)
               }
               className={`absolute top-4 right-4 w-10 h-10 rounded-full grid place-items-center cursor-pointer
-          text-black z-20 overflow-hidden
-          transition-transform duration-500
-          ${openCard === project.id ? "-rotate-45" : ""}
-          bg-[hsl(var(--hue),90%,50%)]
-          shadow-[0_0_16px_4px_hsl(var(--hue),90%,50%)]
-          animate-[pulse-glow_2s_ease-in-out_infinite]
-        `}
+        text-black z-20 overflow-hidden
+        transition-transform duration-500
+        ${openCard === project.id ? "-rotate-45" : ""}
+        bg-[hsl(var(--hue),90%,50%)]
+        shadow-[0_0_16px_4px_hsl(var(--hue),90%,50%)]
+        animate-[pulse-glow_2s_ease-in-out_infinite]
+      `}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -228,8 +232,11 @@ const Projects = () => {
               }`}
             >
               <div>
+                {/* info panel title (always visible) */}
                 <h2 className="text-3xl font-bold mb-2">{project.name}</h2>
-                <div className="text-sm mb-4">{project.description}</div>
+                <div className="text-sm sm:text-base md:text-base mb-4">
+                  {project.description}
+                </div>
                 <div className="flex flex-wrap gap-3">
                   {project.links?.map((link, index) => (
                     <a
@@ -238,10 +245,10 @@ const Projects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`inline-flex items-center px-4 py-2 rounded-md font-semibold text-black
-                  bg-[hsl(var(--hue),90%,50%)]
-                  shadow-[0_0_16px_4px_hsl(var(--hue),90%,50%)]
-                  transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_24px_8px_hsl(var(--hue),90%,50%)]
-                `}
+                bg-[hsl(var(--hue),90%,50%)]
+                shadow-[0_0_16px_4px_hsl(var(--hue),90%,50%)]
+                transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_24px_8px_hsl(var(--hue),90%,50%)]
+              `}
                     >
                       {link.label}
                     </a>
