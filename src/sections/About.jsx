@@ -125,7 +125,6 @@ const About = () => {
                   { image: "assets/pokeball.png" },
                   { image: "assets/book.svg" },
                   { image: "assets/leaf.svg" },
-                  { image: "assets/cat.svg" },
                   { image: "assets/playstation.svg" },
                 ];
 
