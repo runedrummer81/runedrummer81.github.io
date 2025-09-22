@@ -399,11 +399,12 @@ const About = () => {
               <div
                 className="relative rounded-2xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] 
       bg-black/70 backdrop-blur-md 
-      border border-cyan-400/40 
+      
       shadow-[0_0_30px_rgba(13,217,217,0.7)]"
+                onClick={(e) => e.stopPropagation()}
               >
                 {/* glowing border animation */}
-                <span className="absolute inset-0 rounded-2xl border-2 border-cyan-400/50 animate-[glowPulse_3s_ease-in-out_infinite] pointer-events-none"></span>
+                {/* <span className="absolute inset-0 rounded-2xl border-2 border-cyan-400/50 animate-[glowPulse_3s_ease-in-out_infinite] pointer-events-none"></span> */}
 
                 {/* subtle scanline overlay */}
                 <span className="absolute inset-0 rounded-2xl bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.08)_2px,rgba(13,217,217,0.08)_4px)] animate-[scanlines_2s_linear_infinite] pointer-events-none"></span>
@@ -443,10 +444,23 @@ const About = () => {
                       gigs with different bands, and some of my recordings have
                       reached millions of streams.
                     </p>
-                    <p className="text-cyan-300 text-sm md:text-base font-medium tracking-wide drop-shadow-[0_0_5px_cyan]">
-                      Creativity drives everything I do, whether coding or
-                      composing. I love blending both worlds to craft unique
-                      digital experiences.
+                    <p className="relative z-10 text-sm md:text-base font-medium tracking-wide text-center md:text-left">
+                      {/* Glitch layers */}
+                      <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-70 animate-[glitch1_1.2s_infinite]">
+                        Creativity drives everything I do, whether coding or
+                        composing. I love blending both worlds to craft unique
+                        digital experiences.
+                      </span>
+                      <span className="absolute top-0 left-0 w-full h-full text-cyan-500 opacity-60 animate-[glitch2_1.2s_infinite]">
+                        Creativity drives everything I do, whether coding or
+                        composing. I love blending both worlds to craft unique
+                        digital experiences.
+                      </span>
+                      <span className="relative text-gray-200 drop-shadow-[0_0_5px_cyan]">
+                        Creativity drives everything I do, whether coding or
+                        composing. I love blending both worlds to craft unique
+                        digital experiences.
+                      </span>
                     </p>
 
                     {/* Socials */}
