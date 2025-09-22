@@ -5,6 +5,22 @@ import { Globe } from "../components/Globe";
 import CopyEmailButton from "../components/DownloadButton";
 import { Frameworks } from "../components/Frameworks";
 import AuroraBackground from "../components/AuroraBackground";
+import HackIntoHobbies from "../components/HackIntoHobbies";
+
+const TypewriterHobby = ({ hobby }) => {
+  const [text, setText] = useState("");
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (index < hobby.length) {
+      const timeout = setTimeout(() => {
+        setText((prev) => prev + hobby[index]);
+        setIndex(index + 1);
+      }, 80 + Math.random() * 50); // typing speed variation
+      return () => clearTimeout(timeout);
+    }
+  }, [index, hobby]);
+};
 
 const About = () => {
   const grid2Container = useRef();
@@ -96,80 +112,7 @@ const About = () => {
           </div>
 
           <div className="grid-default-color grid-2 relative">
-            <div
-              ref={grid2Container}
-              className="flex flex-col md:flex-row items-center justify-center w-full h-full relative
-      rounded-lg border-2 border-cyan-400/40 shadow-[0_0_20px_rgba(13,217,217,0.5)]
-      bg-black/20 backdrop-blur-md overflow-hidden"
-            >
-              {/* Glitchy title */}
-              <p className="relative text-3xl md:text-5xl font-extrabold mb-4 md:mb-0 text-gray-500">
-                <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-70 animate-[glitch1_1s_infinite]">
-                  MY HOBBIES
-                </span>
-                <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-60 animate-[glitch2_1s_infinite]">
-                  MY HOBBIES
-                </span>
-                <span className="relative">MY HOBBIES</span>
-              </p>
-
-              {/* Optional scanlines / holographic effect */}
-              <span className="absolute inset-0 pointer-events-none bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(13,217,217,0.05)_2px,rgba(13,217,217,0.05)_4px)] animate-[scanlines_2s_linear_infinite]" />
-
-              {/* Draggable Cards */}
-              {(() => {
-                const cards = [
-                  { image: "assets/logos/world-of-warcraft-logo.svg" },
-                  { image: "assets/logos/d20-dice.svg" },
-                  { image: "assets/logos/helldivers2-logo.svg" },
-                  { image: "assets/pokeball.png" },
-                  { image: "assets/book.svg" },
-                  { image: "assets/leaf.svg" },
-                  { image: "assets/playstation.svg" },
-                ];
-
-                const positions = [];
-
-                const getRandomPosition = () => {
-                  let top, left;
-                  let attempts = 0;
-
-                  do {
-                    top = Math.random() * 80 + 5; // top between 5% and 85%
-                    left = Math.random() * 80 + 5; // left between 5% and 85%
-                    attempts++;
-                  } while (
-                    positions.some(
-                      (pos) =>
-                        Math.abs(pos.top - top) < 15 &&
-                        Math.abs(pos.left - left) < 15
-                    ) &&
-                    attempts < 100
-                  );
-
-                  positions.push({ top, left });
-                  return { top, left };
-                };
-
-                return cards.map((card, i) => {
-                  const { top, left } = getRandomPosition();
-                  const rotate = Math.floor(Math.random() * 60) - 30; // random rotation -30° to +30°
-                  return (
-                    <Card
-                      key={i}
-                      style={{
-                        rotate: `${rotate}deg`,
-                        top: `${top}%`,
-                        left: `${left}%`,
-                      }}
-                      image={card.image}
-                      containerRef={grid2Container}
-                      className="rounded-full overflow-hidden"
-                    />
-                  );
-                });
-              })()}
-            </div>
+            <HackIntoHobbies />
           </div>
 
           {/* Grid 3: Digital storm / multi-directional character streams */}
@@ -441,8 +384,8 @@ const About = () => {
                     <p className="text-cyan-300 text-sm md:text-base font-medium tracking-wide drop-shadow-[0_0_5px_cyan]">
                       Beyond my passion for programming and multimedia design, I
                       have a solid background in music. I've played over 200
-                      gigs with different bands, and some of my recordings have
-                      reached millions of streams.
+                      gigs internationally, with different bands, and some of my
+                      recordings have reached millions of streams.
                     </p>
                     <p className="relative z-10 text-sm md:text-base font-medium tracking-wide text-center md:text-left">
                       {/* Glitch layers */}

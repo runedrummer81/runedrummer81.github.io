@@ -71,12 +71,12 @@ const ParallaxBackground = () => {
           {/* Glitch text */}
           <span className="relative">
             <span className="absolute top-0 left-0 w-full h-full text-cyan-400 opacity-70 animate-[glitch1_1s_infinite]">
-              Transmission incoming — scroll
+              Transmission incoming...
             </span>
             <span className="absolute top-0 left-0 w-full h-full text-cyan-300 opacity-50 animate-[glitch2_1s_infinite]">
-              Transmission incoming — scroll
+              Transmission incoming...
             </span>
-            <span className="relative">Transmission incoming — scroll</span>
+            <span className="relative">Transmission incoming...</span>
           </span>
 
           {/* Optional flicker scanlines */}
